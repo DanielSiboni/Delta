@@ -29,11 +29,11 @@ int main() {
     printf("Enter Gary's Birthday:\n");
     scanf("%d/%d/%d", &birthDay, &birthMonth, &birthYear);
 
-    int diff = (currentDay - birthDay) + (currentMonth - birthMonth) * 30 + (currentYear - birthYear) * 365;
+    int diff = (currentDay - birthDay) + (currentMonth - birthMonth) * MONTH_TO_DAYS + (currentYear - birthYear) * YEARS_TO_DAYS;
 
     printf("Gary's age in days: %d\n", diff);
-    printf("Gary's age in months: %f\n", (float)diff / 30);
-    printf("Gary's age in years: %f\n", (float)diff / 365);
+    printf("Gary's age in months: %f\n", (float)diff / MONTH_TO_DAYS);
+    printf("Gary's age in years: %f\n", (float)diff / YEARS_TO_DAYS);
 
     return 0;
 }
