@@ -1,6 +1,6 @@
 /*------------------------------------------------------
 * Filename: Max.c
-* Description: 
+* Description: find the max number without using if, for or ?
 * Author: Daniel Siboni
 -------------------------------------------------------*/
 
