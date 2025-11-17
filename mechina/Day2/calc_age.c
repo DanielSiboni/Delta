@@ -6,6 +6,9 @@
 
 #include <stdio.h>
 
+#define MONTH_TO_DAYS 30
+#define YEARS_TO_DAYS 365
+
 /*------------------------------------------------------
 * Function Name - main
 *
@@ -18,15 +21,15 @@
 * Author - Daniel Siboni
 -------------------------------------------------------*/
 int main() {
-    int cd, cm, cy; // current day, current month, current year
-    int bd, bm, by; // birth day, birth month, birth year
+    int currentDay, currentMonth, currentYear;
+    int birthDay, birthMonth, birthYear;
 
     printf("Enter current date:\n");
-    scanf("%d/%d/%d", &cd, &cm, &cy);
+    scanf("%d/%d/%d", &currentDay, &currentMonth, &currentYear);
     printf("Enter Gary's Birthday:\n");
-    scanf("%d/%d/%d", &bd, &bm, &by);
+    scanf("%d/%d/%d", &birthDay, &birthMonth, &birthYear);
 
-    int diff = (cd - bd) + (cm - bm) * 30 + (cy - by) * 365;
+    int diff = (currentDay - birthDay) + (currentMonth - birthMonth) * 30 + (currentYear - birthYear) * 365;
 
     printf("Gary's age in days: %d\n", diff);
     printf("Gary's age in months: %f\n", (float)diff / 30);
