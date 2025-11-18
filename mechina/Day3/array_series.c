@@ -24,12 +24,18 @@ int main() {
 
     int increaseCheck = 1, decreaseCheck = 1, constantCheck = 1;
     printf("please enter 15 numbers:\n");
-    scanf("%d", &userInputArray[0]);
+    if(scanf("%d", &userInputArray[0]) != 1) {
+        printf("you must enter a valid number\n");
+        return 1;
+    }
     for (int i = 1; i < ARRAY_SIZE; i++) {
-        scanf("%d", &userInputArray[i]);
-        if (increaseCheck && userInputArray[i-1] >= userInputArray[i])
+        if(scanf("%d", &userInputArray[i]) != 1) {
+            printf("you must enter a valid number\n");
+            return 1;
+        }
+        if (increaseCheck && userInputArray[i-1] > userInputArray[i])
             increaseCheck = 0;
-        if (decreaseCheck && userInputArray[i-1] <= userInputArray[i])
+        if (decreaseCheck && userInputArray[i-1] < userInputArray[i])
             decreaseCheck = 0;
         if (constantCheck && userInputArray[i-1] != userInputArray[i])
             constantCheck = 0;

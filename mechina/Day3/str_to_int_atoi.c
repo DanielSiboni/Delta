@@ -1,6 +1,6 @@
 /*------------------------------------------------------
-* Filename: str_to_int.c
-* Description: cast a string of a number to its number without atio and add 36 to the answer
+* Filename: str_to_int_atoi.c
+* Description: cast a string of a number to its number with atio and add 36 to the answer
 * Author: Daniel Siboni
 -------------------------------------------------------*/
 
@@ -26,27 +26,18 @@
 int main() {
     char userInput[MAX_STR_SIZE];
 
-    printf("please enter a number\n");
+    printf("please enter a positive integer\n");
     scanf("%s", userInput);
 
-    int usersNum = 0;
-    int startLoop = 0, sign = 1;
-    if(userInput[0] == '-') {
-        startLoop = 1;
-        sign = -1;
-    }
+    int startLoop = (userInput[0] == '-');
     for (size_t i = startLoop; i < strlen(userInput); i++) {
         if(userInput[i] > '9' || userInput[i] < '0') {
             printf("not a number\n");
             return 1;
         }
-        usersNum += (userInput[i] - ZERE_CHAR);
-        usersNum *= 10;
     }
 
-    usersNum = (usersNum / 10) * sign;
-
-    printf("the number without using atoi: %d\n", (usersNum + ADDED_NUMBER));
-    
+    int usersNum = atoi(userInput);
+    printf("the number using atoi: %d\n", (usersNum + ADDED_NUMBER));
 
 }

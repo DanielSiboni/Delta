@@ -145,7 +145,10 @@ int main() {
 
     printf("please enter 26 numbers:\n");
     for (int i = 0; i < MESSAGE_SIZE; i++) {
-        scanf("%d", &message[i]);
+        if(scanf("%d", &message[i]) != 1) {
+            printf("you must enter a valid number");
+            return 1;
+        }
     }
 
 
