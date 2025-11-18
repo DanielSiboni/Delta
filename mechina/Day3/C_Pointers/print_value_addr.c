@@ -20,13 +20,13 @@
 * Author - Daniel Siboni
 -------------------------------------------------------*/
 int main() {
-    int nums[8];
-    char chars[8];
+    int nums[ARRAY_SIZE];
+    char chars[ARRAY_SIZE];
     int* nums_ptr = nums;
     char* chars_ptr = chars;
 
     printf("enter 8 integers:\n");
-    for (int i = 0; i < 8; i++) {
+    for (int i = 0; i < ARRAY_SIZE; i++) {
         if(scanf("%d", &nums[i]) != 1) {
             printf("invalid num\n");
             return 1;
@@ -34,7 +34,7 @@ int main() {
     }
 
     printf("enter 8 characters:\n");
-    for (int i = 0; i < 8; i++) {
+    for (int i = 0; i < ARRAY_SIZE; i++) {
         if(scanf(" %c", &chars[i]) != 1) {
             printf("invalid char\n");
             return 1;
@@ -43,25 +43,25 @@ int main() {
 
     printf("\n");
 
-    for (int i = 0; i < 8; i++) {
+    for (int i = 0; i < ARRAY_SIZE; i++) {
         printf("value: %d, address: %p\n", *(nums_ptr + i), (nums_ptr + i)); 
     } 
 
     printf("\n");
 
-    for (int i = 0; i < 8; i++) {
+    for (int i = 0; i < ARRAY_SIZE; i++) {
         printf("value: %c, address: %p\n", *(chars_ptr + i), (chars_ptr + i)); 
     }
 
     printf("\n");
 
-    for (int i = 0; i < 8; i++) {
+    for (int i = 0; i < ARRAY_SIZE; i++) {
         printf("value: %d, address: %p\n", nums_ptr[i], &nums_ptr[i]); 
     }
 
     printf("\n");
 
-    for (int i = 0; i < 8; i++) {
+    for (int i = 0; i < ARRAY_SIZE; i++) {
         printf("value: %c, address: %p\n", chars_ptr[i], &chars_ptr[i]); 
     } 
 
