@@ -18,6 +18,18 @@
 #define MAX_FILE_NAME_LEN (256)
 #define MAX_WORD_LEN (100)
 
+
+/*------------------------------------------------------
+* Function Name - read_and_print_file
+*
+* Function Purpose - read a file and print it's contant
+*
+* Parameters – fn: char*, the file's name
+*
+* Return Values - int, for error info
+*
+* Author - Daniel Siboni
+-------------------------------------------------------*/
 int read_and_print_file(char* fn) {
 
     int c = 0;
@@ -47,9 +59,10 @@ int read_and_print_file(char* fn) {
 /*------------------------------------------------------
 * Function Name - read_and_copy_file
 *
-* Function Purpose - read a file and print it's contant
+* Function Purpose - read a file and copy it's contant to another file
 *
-* Parameters – fn: char*, the file's name
+* Parameters –  in_f: char*, the input file's name
+*               out_f: char*, the output file's name
 *
 * Return Values - int, for error info
 *
