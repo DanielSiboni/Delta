@@ -88,16 +88,18 @@ void swap(node* a_parent, node* a, node* b) {
 -------------------------------------------------------*/
 node* sort(node* start) {
 
-    if(!start->next) return start;
+    if(!start || !start->next) return start; //check if the first two element are NULL
 
     node* newStart = start, *cur = start;
 
+    //search for the first smallest node because it will be the new head of the list
     while (cur != NULL) {
         if(newStart->value > cur->value)
             newStart = cur;
         cur = cur->next;
     }
 
+    // special check to sort the first two elements
     if(start->value > start->next->value) {
         node* tmp = start->next;
         start->next = tmp->next;
@@ -105,11 +107,12 @@ node* sort(node* start) {
         start = tmp;
     }
 
+    //bubble sort
     node* stop = start;
-    while (stop != NULL) {
+    while (stop != NULL) { //runs as the lenght of the list (instead of searching the list size and then use for loop)
         cur = start;
-        while (cur->next->next != NULL) {
-            if(cur->next->value > cur->next->next->value)
+        while (cur->next->next != NULL) {   // we use cur->next->next because we need to send the parent of the first element of the swap (if we swap a and b we need a_p -> a -> b)
+            if(cur->next->value > cur->next->next->value) // check if swap needed
                 swap(cur, cur->next, cur->next->next);
             cur = cur->next;
         }
@@ -202,6 +205,7 @@ void find_median(node* start) {
     
     if(num_elements == 1) {
         printf("the list's median is: %.1f", (float)cur->value);
+        return;
     }
 
 
@@ -228,6 +232,7 @@ int main() {
     start = sort(start);
     print_array(start);
     find_median(start);
+    free_list(start);
 
     return 0;
 }
