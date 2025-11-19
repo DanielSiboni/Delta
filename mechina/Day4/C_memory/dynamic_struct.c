@@ -7,51 +7,52 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MAX_HOUR (23)
-#define MAX_MINUTE (59)
-#define MAX_SECOND (59)
+#define MAX_HOUR (24)
+#define MAX_MINUTE (60)
+#define MAX_SECOND (60)
 
 
-typedef struct time {
+typedef struct time_s 
+{
     unsigned int hour;
     unsigned int minute;
     unsigned int second;
-}time;
+} time_s;
 
 
 /*------------------------------------------------------
 * Function Name - getInputFromUser
 *
-* Function Purpose - create new time object in the heap and fill it with user's input
+* Function Purpose - create new time_s object in the heap and fill it with user's input
 *
 * Parameters –  None
 *
-* Return Values - time*, a pointer to the new time object
+* Return Values - time_s*, a pointer to the new time_s object
 *
 * Author - Daniel Siboni
 -------------------------------------------------------*/
-time* getInputFromUser() {
+time_s* getInputFromUser() {
     unsigned int hour = 0, minute = 0, second = 0;
     
-    printf("please enter time's hour: ");
-    if((scanf("%u", &hour) != 1) || hour > MAX_HOUR) {
+    printf("please enter time_s's hour: ");
+    if((scanf("%u", &hour) != 1) || hour >= MAX_HOUR) {
         printf("invalid hour\n");
         return NULL;
     }
 
-    printf("please enter time's minute: ");
-    if((scanf("%u", &minute) != 1) || minute > MAX_MINUTE) {
+    printf("please enter time_s's minute: ");
+    if((scanf("%u", &minute) != 1) || minute >= MAX_MINUTE) {
         printf("invalid minute\n");
         return NULL;
     }
 
-    printf("please enter time's second: ");
-    if((scanf("%u", &second) != 1) || second > MAX_SECOND) {
-        printf("invalid hour\n");
+    printf("please enter time_s's second: ");
+    if((scanf("%u", &second) != 1) || second >= MAX_SECOND) {
+        printf("invalid second\n");
         return NULL;
     }
 
-    time* t = (time*)malloc(sizeof(time));
+    time_s* t = (time_s*)malloc(sizeof(time_s));
     if(t == NULL) return NULL;
 
     t->hour = hour;
@@ -64,21 +65,21 @@ time* getInputFromUser() {
 /*------------------------------------------------------
 * Function Name - timesAddition
 *
-* Function Purpose - create new time object in the heap and fill it with the sum of times
+* Function Purpose - create new time_s object in the heap and fill it with the sum of times
 *
-* Parameters –  t1: time*, a pointer to the first time object
-*               t2: time*, a pointer to the second time object
+* Parameters –  t1: time_s*, a pointer to the first time_s object
+*               t2: time_s*, a pointer to the second time_s object
 *
-* Return Values - time*, a pointer to the new time object
+* Return Values - time_s*, a pointer to the new time_s object
 *
 * Author - Daniel Siboni
 -------------------------------------------------------*/
-time* timesAddition(time* t1, time* t2) {
+time_s* timesAddition(time_s* t1, time_s* t2) {
     unsigned int second = t1->second + t2->second;
     unsigned int minute = t1->minute + t2->minute + (second / MAX_SECOND);
     unsigned int hour = t1->hour + t2->hour + (minute / MAX_MINUTE);
 
-    time* tSum = (time*)malloc(sizeof(time));
+    time_s* tSum = (time_s*)malloc(sizeof(time_s));
     if(tSum == NULL) return NULL;
 
     tSum->hour = hour % MAX_HOUR;
@@ -101,24 +102,24 @@ time* timesAddition(time* t1, time* t2) {
 -------------------------------------------------------*/
 int main() {
 
-    time* t1 = getInputFromUser();
+    time_s* t1 = getInputFromUser();
     if(t1 == NULL) exit(EXIT_FAILURE);
     
-    time* t2 = getInputFromUser();
-    if(t1 == NULL) {
+    time_s* t2 = getInputFromUser();
+    if(t2 == NULL) {
         free(t1);
         exit(EXIT_FAILURE);
     }
 
-    time* tSum = timesAddition(t1, t2);
+    time_s* tSum = timesAddition(t1, t2);
     if(tSum == NULL) {
         free(t1);
         free(t2);
         exit(EXIT_FAILURE);
     }
 
-    printf("first time: %02u:%02u:%02u\n", t1->hour, t1->minute, t1->second);
-    printf("second time: %02u:%02u:%02u\n", t2->hour, t2->minute, t2->second);
+    printf("first time_s: %02u:%02u:%02u\n", t1->hour, t1->minute, t1->second);
+    printf("second time_s: %02u:%02u:%02u\n", t2->hour, t2->minute, t2->second);
     printf("sum of times: %02u:%02u:%02u\n", tSum->hour, tSum->minute, tSum->second);
     
     free(t1);
