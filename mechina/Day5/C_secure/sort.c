@@ -13,6 +13,9 @@
 #define CHUNK_INPUT_SIZE (1024)
 #define STRING_ARRAY_SIZE (5)
 
+#define END_OF_LINE ('\n')
+#define NULL_TERMINATOR ('\0')
+
 
 /*------------------------------------------------------
 * Function Name - buffer_contains_newline
@@ -29,7 +32,7 @@
 unsigned int buffer_contains_newline(char* buffer, unsigned int buffer_size) {
     unsigned int i = 0;
     for(; i < CHUNK_INPUT_SIZE; i++) {
-        if(buffer[i] == '\n')
+        if(buffer[i] == END_OF_LINE || buffer[i] == EOF)
             return i;
     }
     return i;
@@ -51,17 +54,17 @@ char* dyn_scanf(void) {
     char user_input_buffer[CHUNK_INPUT_SIZE + 1]; // +1 for null terminator
     char* user_str = (char*)malloc(sizeof(char));
     if(user_str == NULL) exit(EXIT_FAILURE);
-    user_str[0] = '\0';
+    user_str[0] = NULL_TERMINATOR;
 
     unsigned long long int str_size = 1;
     fgets(user_input_buffer, CHUNK_INPUT_SIZE + 1, stdin);
-    user_input_buffer[CHUNK_INPUT_SIZE] = '\0';
+    user_input_buffer[CHUNK_INPUT_SIZE] = NULL_TERMINATOR;
 
     unsigned int buffer_length = 0;
     while ((buffer_length = buffer_contains_newline(user_input_buffer, CHUNK_INPUT_SIZE)) == CHUNK_INPUT_SIZE || buffer_length) {
 
         if(buffer_length != CHUNK_INPUT_SIZE)
-            user_input_buffer[buffer_length] = '\0';
+            user_input_buffer[buffer_length] = NULL_TERMINATOR;
 
         if(str_size + buffer_length < str_size) {
             printf("your input is too long\n");
@@ -70,8 +73,12 @@ char* dyn_scanf(void) {
 
         str_size += buffer_length;
 
-        user_str = (char*)realloc(user_str, str_size);
-        if(user_str == NULL) exit(EXIT_FAILURE);
+        char* tmp = (char*)realloc(user_str, str_size);
+        if(tmp == NULL) {
+            free(user_str);
+            exit(EXIT_FAILURE);
+        }
+        user_str = tmp;
 
         int error_code = 0;
         if(error_code = strcat_s(user_str,str_size, user_input_buffer)) {
@@ -82,7 +89,7 @@ char* dyn_scanf(void) {
         if(buffer_length != CHUNK_INPUT_SIZE) break;
 
         fgets(user_input_buffer, CHUNK_INPUT_SIZE, stdin);
-        user_input_buffer[CHUNK_INPUT_SIZE] = '\0';
+        user_input_buffer[CHUNK_INPUT_SIZE] = NULL_TERMINATOR;
     }
 
     return user_str;
