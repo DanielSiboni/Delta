@@ -51,7 +51,7 @@ char* dyn_scanf(void) {
     user_str[0] = '\0';
 
     unsigned long long int str_size = 1;
-    fgets(user_input_buffer, CHUNK_INPUT_SIZE, stdin);
+    fgets(user_input_buffer, CHUNK_INPUT_SIZE + 1, stdin);
     user_input_buffer[CHUNK_INPUT_SIZE] = '\0';
 
     unsigned int buffer_length = 0;
@@ -70,8 +70,9 @@ char* dyn_scanf(void) {
         user_str = (char*)realloc(user_str, str_size);
         if(user_str == NULL) exit(EXIT_FAILURE);
 
-        if(strcat_s(user_str,buffer_length + 1, user_input_buffer)) {
-            printf("error acurred while copying your string\n");
+        int error_code = 0;
+        if(error_code = strcat_s(user_str,str_size, user_input_buffer)) {
+            printf("error acurred while copying your string, error code: %d\n", error_code);
             exit(EXIT_FAILURE);
         }
 
@@ -101,7 +102,7 @@ int main() {
     printf("please enter a string followd by enter\n");
     char* user_str = dyn_scanf();
 
-    printf("user's string:\n%s", user_str);
+    printf("user's string:\t%s", user_str);
 
     free(user_str);
     
