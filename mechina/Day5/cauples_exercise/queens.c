@@ -106,26 +106,22 @@ int solve_problem(int queen_count) {
         return 1;
     }
     
-    for(int i = 0; i < QUEENS_COUNT; i++) {
 
-        if((queens[i].x_axis == DEFUALT_QUEEN_VALUE || queens[i].y_axis == DEFUALT_QUEEN_VALUE) && queen_count) continue;
-
-        int x = queen_count;
-        for(int y = 0; y < BOARD_SIZE; y++) {
-            try.x_axis = x;
-            try.y_axis = y;
-            if(can_be_placed(try)) {
-                queens[queen_count].x_axis = x;
-                queens[queen_count].y_axis = y;
-                board[x][y] = QUEEN_CELL;
-                if(solve_problem(queen_count + 1)) return 1;
-                queens[queen_count].x_axis = DEFUALT_QUEEN_VALUE;
-                queens[queen_count].y_axis = DEFUALT_QUEEN_VALUE;
-                board[x][y] = EMPTY_CELL;
-            }
+    int x = queen_count;
+    for(int y = 0; y < BOARD_SIZE; y++) {
+        try.x_axis = x;
+        try.y_axis = y;
+        if(can_be_placed(try)) {
+            queens[queen_count].x_axis = x;
+            queens[queen_count].y_axis = y;
+            board[x][y] = QUEEN_CELL;
+            if(solve_problem(queen_count + 1)) return 1;
+            queens[queen_count].x_axis = DEFUALT_QUEEN_VALUE;
+            queens[queen_count].y_axis = DEFUALT_QUEEN_VALUE;
+            board[x][y] = EMPTY_CELL;
         }
-
     }
+
 
     return 0;
 
