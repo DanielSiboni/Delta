@@ -102,6 +102,8 @@ int main() {
     char* user_str = dyn_scanf();
 
     printf("user's string:\n%s", user_str);
+
+    free(user_str);
     
     return 0;
 }
